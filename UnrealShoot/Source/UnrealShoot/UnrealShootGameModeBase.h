@@ -6,12 +6,12 @@
 #include "GameFramework/GameModeBase.h"
 #include "UnrealShootGameModeBase.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class UNREALSHOOT_API AUnrealShootGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	AUnrealShootGameModeBase();
 };
