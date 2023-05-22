@@ -38,6 +38,9 @@ void AUEBaSECharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("MoveRight", this, &AUEBaSECharacter::MoveRight);
 	PlayerInputComponent->BindAxis("LookUp", this, &AUEBaSECharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAround", this, &AUEBaSECharacter::AddControllerYawInput);
+
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 }
 
 void AUEBaSECharacter::MoveForvard(float Amount)
