@@ -39,17 +39,39 @@ void AUEBaSECharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("LookUp", this, &AUEBaSECharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAround", this, &AUEBaSECharacter::AddControllerYawInput);
 
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AUEBaSECharacter::Jump);
+	//PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &AUEBaSECharacter::OnStartRunning);
+	PlayerInputComponent->BindAction("Run",IE_Released, this, &AUEBaSECharacter::OnStopRunning);
+
+}
+
+bool AUEBaSECharacter::IsRunning() const
+{
+	return WantsToRun && !GetVelocity().IsZero() && IsMovingForward;
 }
 
 void AUEBaSECharacter::MoveForvard(float Amount)
 {
+	IsMovingForward = Amount > 0.0f;
+
 	AddMovementInput(GetActorForwardVector(), Amount);
 }
 
 void AUEBaSECharacter::MoveRight(float Amount)
 {
 	AddMovementInput(GetActorRightVector(), Amount);
+}
+
+void AUEBaSECharacter::OnStartRunning()
+{
+	
+	WantsToRun= true;
+}
+
+void AUEBaSECharacter::OnStopRunning()
+{
+	WantsToRun = false;
 }
 
