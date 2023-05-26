@@ -5,8 +5,10 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/UECharacterMovementComponent.h"
 
-AUEBaSECharacter::AUEBaSECharacter()
+AUEBaSECharacter::AUEBaSECharacter(const FObjectInitializer& Object) 
+	:Super(Object.SetDefaultSubobjectClass<UUECharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
 	PrimaryActorTick.bCanEverTick = true;
 

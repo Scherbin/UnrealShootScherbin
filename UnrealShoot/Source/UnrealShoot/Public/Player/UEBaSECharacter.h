@@ -16,7 +16,7 @@ class UNREALSHOOT_API AUEBaSECharacter : public ACharacter
 
 public:
 	
-	AUEBaSECharacter();
+	AUEBaSECharacter(const FObjectInitializer& Object);
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UCameraComponent* CameraComponent;
