@@ -57,12 +57,13 @@ bool AUEBaSECharacter::IsRunning() const
 void AUEBaSECharacter::MoveForvard(float Amount)
 {
 	IsMovingForward = Amount > 0.0f;
-
+	if(Amount == 0.0f) return;
 	AddMovementInput(GetActorForwardVector(), Amount);
 }
 
 void AUEBaSECharacter::MoveRight(float Amount)
 {
+	if(Amount== 0.0f) return;
 	AddMovementInput(GetActorRightVector(), Amount);
 }
 
@@ -77,3 +78,12 @@ void AUEBaSECharacter::OnStopRunning()
 	WantsToRun = false;
 }
 
+float AUEBaSECharacter::GetMovementDirection() const
+{
+	if(GetVelocity().IsZero()) return 0.0f;
+
+	const auto VelocityNormal = GetVelocity().GetSafeNormal();
+	const auto AngleBetween = FMath::Acos(FVector::DotProduct(GetActorForwardVector(), VelocityNormal));
+	const auto CrossProduct = FVector::CrossProduct(GetActorForwardVector(), VelocityNormal);
+	return FMath::RadiansToDegrees(AngleBetween) * FMath::Sign(CrossProduct.Z);
+}
