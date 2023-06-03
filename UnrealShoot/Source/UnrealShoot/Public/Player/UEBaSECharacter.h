@@ -24,6 +24,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USpringArmComponent* SpringArmComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAcces = "true"))
+	class USoundCue* FireSound;
+
 	virtual void BeginPlay() override;
 
 public:	
@@ -46,5 +49,7 @@ private:
 
 	void OnStartRunning();
 	void OnStopRunning();
+
+	void FireWeapon();
 	
 };
