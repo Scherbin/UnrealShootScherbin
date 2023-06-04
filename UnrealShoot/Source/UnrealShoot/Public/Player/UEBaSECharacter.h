@@ -32,6 +32,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAcces = "true"))
 	class UParticleSystem* MuzzleFlash;
 
+	//montage for firing our weapon
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAcces = "true"))
+	class UAnimMontage* HipFireMontage;
+
 	virtual void BeginPlay() override;
 
 public:	
