@@ -24,8 +24,13 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USpringArmComponent* SpringArmComponent;
 
+	//sound played when firing the weapon
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAcces = "true"))
 	class USoundCue* FireSound;
+
+	//flash spawned at the muzzle of the gun
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAcces = "true"))
+	class UParticleSystem* MuzzleFlash;
 
 	virtual void BeginPlay() override;
 

@@ -8,6 +8,7 @@
 #include "Components/UECharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
+#include "Engine/SkeletalMeshSocket.h"
 
 AUEBaSECharacter::AUEBaSECharacter(const FObjectInitializer& Object) 
 	:Super(Object.SetDefaultSubobjectClass<UUECharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
@@ -108,5 +109,15 @@ void AUEBaSECharacter::FireWeapon()
 	if (FireSound)
 	{
 		UGameplayStatics::PlaySound2D(this, FireSound);
+	}
+	const USkeletalMeshSocket* BarrelSocket = GetMesh()->GetSocketByName("Muzzle");
+	if (BarrelSocket)
+	{
+		const FTransform SocketTransform = BarrelSocket->GetSocketTransform(GetMesh());
+	
+		if (MuzzleFlash)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), MuzzleFlash, SocketTransform);
+		}
 	}
 }
